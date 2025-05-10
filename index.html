@@ -1,18 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Apresentação de Veículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Fundo cinza escuro */
+            color: #ffffff; /* Texto branco */
+        }
+        header {
+            background-color: #003087; /* Azul escuro inicial (Vectra) */
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            transition: background-color 0.3s;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #2c2c2c; /* Cinza escuro */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .vehicle-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .vehicle-info {
+            margin-top: 1rem;
+        }
+        .vehicle-info p {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #003087; /* Cor inicial (Vectra) */
+            transition: color 0.3s;
+        }
+        .vehicle-select {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.5rem;
+            font-size: 1rem;
+            background-color: #000000; /* Preto */
+            color: white;
+            border: 1px solid #333333;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 200px;
+            text-align: center;
+        }
+        .vehicle-select:focus {
+            outline: none;
+            border-color: #ffffff;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #003087; /* Azul escuro inicial (Vectra) */
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            main {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            .vehicle-select {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1 id="title">Chevrolet Vectra 2002 CD 2.0</h1>
+    </header>
     <main>
-        <h1>Aula Git 10/05/2025</h1>
-        <br>
-        <p>Vectra 2002 CD 2.0</p>
-        <br>
-        <img src="https://cdn.autopapo.com.br/box/uploads/2021/12/16011639/chevrolet-vectra-cd-cinza-de-frente-732x488.jpg" 
-        alt="Vectra Cinza">
+        <select class="vehicle-select" onchange="updateVehicle(this.value)">
+            <option value="vectra">Chevrolet Vectra 2002</option>
+            <option value="mt07">Yamaha MT-07 2018</option>
+            <option value="chevelle">Chevrolet Chevelle 1970</option>
+        </select>
+        <img id="vehicle-img" src="https://cdn.autopapo.com.br/box/uploads/2021/12/16011639/chevrolet-vectra-cd-cinza-de-frente-732x488.jpg" 
+             alt="Chevrolet Vectra CD 2.0 Cinza" class="vehicle-img">
+        <section class="vehicle-info">
+            <h2>Detalhes do Veículo</h2>
+            <p><span class="highlight">Modelo:</span> <span id="model">Chevrolet Vectra CD</span></p>
+            <p><span class="highlight">Ano:</span> <span id="year">2002</span></p>
+            <p><span class="highlight">Motor:</span> <span id="engine">2.0 8V Flex</span></p>
+            <p><span class="highlight">Transmissão:</span <span id="transmission">Manual de 5 marchas</span></p>
+            <p><span class="highlight">Cor:</span> <span id="color">Cinza</span></p>
+            <p><span class="highlight">Descrição:</span> <span id="description">Um sedan clássico com design elegante, ótimo desempenho e conforto para o dia a dia. Ideal para quem busca confiabilidade e estilo.</span></p>
+        </section>
     </main>
+    <footer>
+        <p>Apresentação criada em 10/05/2025 | Aula de Git</p>
+    </footer>
+    <script>
+        function updateVehicle(vehicle) {
+            const title = document.getElementById("title");
+            const img = document.getElementById("vehicle-img");
+            const model = document.getElementById("model");
+            const year = document.getElementById("year");
+            const engine = document.getElementById("engine");
+            const transmission = document.getElementById("transmission");
+            const color = document.getElementById("color");
+            const description = document.getElementById("description");
+            const header = document.querySelector("header");
+            const footer = document.querySelector("footer");
+            const highlights = document.querySelectorAll(".highlight");
+
+            if (vehicle === "vectra") {
+                title.textContent = "Chevrolet Vectra 2002 CD 2.0";
+                img.src = "https://cdn.autopapo.com.br/box/uploads/2021/12/16011639/chevrolet-vectra-cd-cinza-de-frente-732x488.jpg";
+                img.alt = "Chevrolet Vectra CD 2.0 Cinza";
+                model.textContent = "Chevrolet Vectra CD";
+                year.textContent = "2002";
+                engine.textContent = "2.0 8V Flex";
+                transmission.textContent = "Manual de 5 marchas";
+                color.textContent = "Cinza";
+                description.textContent = "Um sedan clássico com design elegante, ótimo desempenho e conforto para o dia a dia. Ideal para quem busca confiabilidade e estilo.";
+                header.style.backgroundColor = "#003087"; // Azul escuro
+                footer.style.backgroundColor = "#003087";
+                highlights.forEach(h => h.style.color = "#003087");
+            } else if (vehicle === "mt07") {
+                title.textContent = "Yamaha MT-07 2018";
+                img.src = "https://cdn.motor1.com/images/mgl/KKerq/s1/yamaha-mt-07-2018.jpg";
+                img.alt = "Yamaha MT-07 2018 Azul";
+                model.textContent = "Yamaha MT-07";
+                year.textContent = "2018";
+                engine.textContent = "689cc, 2 cilindros, 74,8 cv";
+                transmission.textContent = "Manual de 6 marchas";
+                color.textContent = "Azul Metálico";
+                description.textContent = "Uma naked esportiva com design agressivo, excelente manobrabilidade e potência para uma pilotagem emocionante.";
+                header.style.backgroundColor = "#000000"; // Preto
+                footer.style.backgroundColor = "#000000";
+                highlights.forEach(h => h.style.color = "#000000");
+            } else if (vehicle === "chevelle") {
+                title.textContent = "Chevrolet Chevelle 1970";
+                img.src = "https://cdn.dealeraccelerate.com/noreserve/1/688/29532/1920x1440/1970-chevrolet-chevelle";
+                img.alt = "Chevrolet Chevelle 1970 Preto";
+                model.textContent = "Chevrolet Chevelle";
+                year.textContent = "1970";
+                engine.textContent = "454ci V8";
+                transmission.textContent = "Manual de 4 marchas";
+                color.textContent = "Preto";
+                description.textContent = "Um muscle car icônico com design agressivo, potência bruta e estilo clássico americano.";
+                header.style.backgroundColor = "#000000"; // Preto
+                footer.style.backgroundColor = "#000000";
+                highlights.forEach(h => h.style.color = "#000000");
+            }
+        }
+    </script>
 </body>
 </html>
